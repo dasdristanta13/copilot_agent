@@ -1,0 +1,2 @@
+// Spaces feature module
+export {}

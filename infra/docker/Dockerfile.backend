@@ -1,0 +1,38 @@
+# Stage 1: Build virtual environment
+FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim AS builder
+
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_LINK_MODE=copy
+
+WORKDIR /app
+
+# Copy workspace configs and dependencies
+COPY uv.lock pyproject.toml /app/
+COPY backend/pyproject.toml /app/backend/
+COPY backend/app /app/backend/app
+
+# Sync dependencies for the backend package specifically
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen --no-dev --package business-copilot-backend
+
+# Stage 2: Runtime environment
+FROM python:3.13-slim-bookworm
+
+WORKDIR /app
+
+# Copy venv and source code
+COPY --from=builder /app/.venv /app/.venv
+COPY backend/pyproject.toml /app/backend/
+COPY backend/app /app/backend/app
+COPY backend/celery_app /app/backend/celery_app
+COPY backend/scripts /app/backend/scripts
+
+# Add virtual environment to PATH
+ENV PATH="/app/.venv/bin:$PATH"
+ENV PYTHONUNBUFFERED=1
+
+EXPOSE 8000
+
+# Set working directory to backend so application modules are resolvable
+WORKDIR /app/backend
+CMD ["uvicorn", "app.main:create_app", "--factory", "--host", "0.0.0.0", "--port", "8000"]

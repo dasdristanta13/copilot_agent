@@ -1,0 +1,54 @@
+# Ruff — replaces black, isort, flake8, pyupgrade
+# Docs: https://docs.astral.sh/ruff/
+
+target-version = "py313"
+line-length = 100
+src = ["backend/app", "tests"]
+
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+
+[lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # pyflakes
+    "I",      # isort
+    "N",      # pep8-naming
+    "UP",     # pyupgrade
+    "B",      # flake8-bugbear
+    "SIM",    # flake8-simplify
+    "TCH",    # flake8-type-checking
+    "RUF",    # ruff-specific rules
+    "S",      # flake8-bandit (security)
+    "DTZ",    # flake8-datetimez
+    "PIE",    # flake8-pie
+    "PT",     # flake8-pytest-style
+    "RSE",    # flake8-raise
+    "RET",    # flake8-return
+    "T20",    # flake8-print
+    "ANN",    # flake8-annotations
+    "ASYNC",  # flake8-async
+]
+ignore = [
+    "ANN101",  # missing type annotation for self
+    "ANN102",  # missing type annotation for cls
+    "ANN401",  # dynamically typed expressions (Any)
+    "S101",    # assert usage (allowed in tests)
+    "B008",    # function call in default argument (FastAPI Depends)
+]
+
+[lint.per-file-ignores]
+"tests/**/*.py" = ["S101", "ANN", "T20"]
+"backend/scripts/**/*.py" = ["T20"]
+"backend/alembic/**/*.py" = ["ANN"]
+"backend/app/config.py" = ["S104", "S105"]
+
+[lint.isort]
+known-first-party = ["app"]
+force-single-line = false
+combine-as-imports = true

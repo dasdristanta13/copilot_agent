@@ -1,0 +1,2 @@
+// FinOps feature module
+export {}

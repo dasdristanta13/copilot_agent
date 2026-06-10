@@ -1,0 +1,91 @@
+@import 'tailwindcss';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Premium Custom Color Palette (HSL Tailored Colors) */
+  --color-slate-50: hsl(210, 40%, 98%);
+  --color-slate-100: hsl(210, 40%, 96.1%);
+  --color-slate-200: hsl(210, 40%, 90.2%);
+  --color-slate-300: hsl(210, 40%, 80.4%);
+  --color-slate-400: hsl(210, 40%, 65.1%);
+  --color-slate-500: hsl(210, 40%, 50%);
+  --color-slate-600: hsl(210, 40%, 40%);
+  --color-slate-700: hsl(210, 40%, 30.2%);
+  --color-slate-800: hsl(210, 40%, 15.1%);
+  --color-slate-900: hsl(210, 40%, 9.8%);
+  --color-slate-950: hsl(210, 40%, 6.1%);
+
+  --color-primary-50: hsl(263, 100%, 98%);
+  --color-primary-100: hsl(263, 100%, 96%);
+  --color-primary-200: hsl(263, 100%, 90%);
+  --color-primary-300: hsl(263, 100%, 80%);
+  --color-primary-400: hsl(263, 100%, 70%);
+  --color-primary-500: hsl(263, 100%, 60%);
+  --color-primary-600: hsl(263, 85%, 50%);
+  --color-primary-700: hsl(263, 85%, 40%);
+  --color-primary-800: hsl(263, 85%, 30%);
+  --color-primary-900: hsl(263, 85%, 20%);
+  --color-primary-950: hsl(263, 85%, 10%);
+
+  --color-accent-blue: hsl(217, 91%, 60%);
+  --color-accent-teal: hsl(173, 80%, 40%);
+  --color-accent-rose: hsl(340, 82%, 52%);
+
+  /* Animation values */
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.5s infinite linear;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-slate-950);
+  color: var(--color-slate-100);
+  scroll-behavior: smooth;
+}
+
+/* Custom Webkit scrollbar for premium aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-slate-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-slate-700);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-600);
+}
